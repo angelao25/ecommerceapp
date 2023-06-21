@@ -1,5 +1,14 @@
-<%= link_to products_path do %>
-  <h1>E-commerce Store</h1>
-<% end %>
-<%= link_to "Add product", new_product_path %>
-<%= link_to "Categories", categories_path %>
+<div class="bg-white flex justify-between items-cente px-2">
+  <%= link_to products_path do %>
+    <h1 class="text-2xl font-bold text-teal-500">E-commerce</h1>
+  <% end %>
+  <div class="">
+    <%= link_to "Add product", new_product_path, class: "mx-2 text-teal-500 font-bold" if Current.user %>
+    <%= link_to "Favorites", favorites_path, class: "mx-2 text-teal-500 font-bold" if Current.user %>
+    <%= link_to "Categories", categories_path, class: "mx-2 text-teal-500 font-bold" if Current.user&.admin? %>
+    <%= link_to "Login", new_session_path, class: "mx-2 text-teal-500 font-bold" unless Current.user %>
+    <%= link_to "Register", new_user_path, class: "mx-2 text-teal-500 font-bold" unless Current.user %>
+    <%= link_to "Logout", session_path(Current.user.id), data: { turbo_method: :delete,
+  turbo_confirm: "Confirm"}, class: "mx-2 text-teal-500 font-bold"if Current.user %>
+  </div>
+</div>

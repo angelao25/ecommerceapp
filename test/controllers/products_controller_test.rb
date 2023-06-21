@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
+  def setup
+    login
+  end
   test "render a list of products" do
     get products_path
 
@@ -125,4 +128,6 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to products_path
     assert_equal flash[:notice], "Your product was deleted successfully"
   end
+
+
 end
